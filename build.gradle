@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'eu.accesa'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+     IntegrationTest {
+        java {
+            srcDir 'source/main/nicu'
+        }
+        resources {
+            srcDir 'source/main/resources'
+        }
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'source.main.nicu.Main'
+    }
+}
+
+run {
+    main = "source.main.nicu.Main"
+}
+
+test {
+    useJUnitPlatform()
+}
